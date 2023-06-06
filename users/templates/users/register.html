@@ -1,0 +1,129 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<div class="col-12 col-sm-9 col-md-7 col-lg-5" style="padding:0px;margin-bottom:15px;">
+  <div class="content-section">
+    
+    <form method="POST">
+      {% if form.non_field_errors %}
+      
+      <div class="alert alert-block alert-danger">
+        
+        {{ form.non_field_errors.0 }}
+      
+      </div>
+      
+      {% elif form.errors %}
+      
+      <div class="alert alert-block alert-danger">
+        There were some errors in the form.
+      </div>
+      
+      {% endif %}
+      {% csrf_token %}
+      
+      <div class="auth_headline">
+        <p>Register</p>
+      </div>
+      
+	<input id="first_name" name="first_name" value="{{ form.firstname.value|default_if_none:'' }}" placeholder="First Name" class="auth_input" type="text" autocomplete="first_name" maxlength="150" required>
+	
+	{% if form.firstname.errors %}
+      {% for error in form.firstname.errors %}
+
+
+      <div class="invalid-feedback">
+        {{ error }}
+      </div>
+
+
+      {% endfor %}
+      {% endif %}
+
+
+	
+	<input id="last_name" name="last_name" value="{{ form.lastname.value|default_if_none:'' }}" placeholder="Last Name" class="auth_input" type="text" autocomplete="last_name" maxlength="150" required>
+
+	{% if form.lastname.errors %}
+      {% for error in form.lastname.errors %}
+
+
+      <div class="invalid-feedback">
+        {{ error }}
+      </div>
+
+
+      {% endfor %}
+      {% endif %}
+
+
+      <input id="id_username" name="username" value="{{ form.username.value|default_if_none:'' }}" placeholder="Email" class="auth_input" type="text" autocomplete="username" maxlength="150" required>
+
+
+      {% if form.username.errors %}
+      {% for error in form.username.errors %}
+
+
+      <div class="invalid-feedback">
+        {{ error }}
+      </div>
+
+
+      {% endfor %}
+      {% endif %}
+
+
+      <input id="id_password1" name="password1" placeholder="Password" class="auth_input" type="password" autocomplete="new-password" required>
+      <span class="auth_helptext">
+        <ul>
+          <li>Your password need to be at least 8 characters long.</li>
+        </ul>
+      </span>
+
+
+      {% if form.password1.errors %}
+      {% for error in form.password1.errors %}
+
+
+      <div class="invalid-feedback">
+        {{ error }}
+      </div>
+
+
+      {% endfor %}
+      {% endif %}
+
+
+      <input id="id_password2" name="password2" placeholder="Password" class="auth_input" type="password" autocomplete="new-password" required>
+      
+
+      <span class="auth_helptext">
+        Please confirm your password.
+      </span>
+
+
+      {% if form.password2.errors %}
+      {% for error in form.password2.errors %}
+
+
+      <div class="invalid-feedback">
+        {{ error }}
+      </div>
+
+
+      {% endfor %}
+      {% endif %}
+
+
+      <button class="button auth_button" type="submit" style="margin-top:40px;">Register</button>
+    </form>
+
+    <div style="padding-top:1rem;">
+      <div class="auth_note">
+        Have An Account? <a style="margin-left:4px;color:#600000;" href="{% url 'login' %}">Sign In</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
